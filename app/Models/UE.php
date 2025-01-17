@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ue extends Model
+class UE extends Model
 {
-    
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use HasFactory;
 
-    protected $table = 'ues';
+    protected $fillable = ['code', 'nom', 'credits_ects', 'semestre'];
 
-    protected $fillable = ['code', 'nom', 'ects', 'semestre'];
-
+    public function ecs()
+    {
+        return $this->hasMany(EC::class, 'ue_id');
+    }
 }
+
+
+
+
 

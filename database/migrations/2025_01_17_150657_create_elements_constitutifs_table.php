@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('etudiants', function (Blueprint $table) {
+        Schema::create('elements_constitutifs', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_etudiant');
+            $table->string('code');
             $table->string('nom');
-            $table->string('prenom');
-            $table->string('niveau');
+            $table->integer('coefficient');
+            $table->foreignId('ue_id')->constrained('unites_enseignement')->onDelete('cascade');
             $table->timestamps();
         });
     }
     
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('etudiants');
+        Schema::dropIfExists('elements_constitutifs');
     }
 };

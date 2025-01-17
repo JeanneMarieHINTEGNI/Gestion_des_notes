@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ec extends Model
+class EC extends Model
 {
-    public function up()
-{
-    Schema::create('ecs', function (Blueprint $table) {
-        $table->id();
-        $table->string('nom'); // Nom de l'EC
-        $table->unsignedBigInteger('ue_id'); // Clé étrangère vers l'UE
-        $table->timestamps();
+    use HasFactory;
 
-        $table->foreign('ue_id')->references('id')->on('ues')->onDelete('cascade');
-    });
+    protected $fillable = ['code', 'nom', 'coefficient', 'ue_id'];
+
+    public function ue()
+    {
+        return $this->belongsTo(UE::class, 'ue_id');
+    }
 }
 
-}

@@ -1,14 +1,16 @@
 <?php
-use App\Http\Controllers\UeController;
-use App\Http\Controllers\EcController;
-use App\Http\Controllers\NoteController;
+use App\Http\Controllers\UEController;
 
-Route::resource('ues', UeController::class);
-Route::resource('ecs', EcController::class);
-Route::resource('notes', NoteController::class);
-Route::get('/', function () {
-    return "Bienvenue dans la gestion des notes";
-});
+Route::get('/ues', [UEController::class, 'index'])->name('ues.index');
+Route::get('/ues/{ue}/edit', [UEController::class, 'edit'])->name('ues.edit');
+Route::delete('/ues/{ue}', [UEController::class, 'destroy'])->name('ues.destroy');
+
+
+
+
+
+
+
 
 
 

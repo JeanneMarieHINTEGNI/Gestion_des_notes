@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UEController extends Controller
+class NoteController extends Controller
 {
     //
 }
