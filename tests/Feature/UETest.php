@@ -31,7 +31,7 @@ class UETest extends TestCase
         UE::create([
             'code' => 'UE12',
             'nom' => 'Mathématiques',
-            'credits_ects' => 35, // Crédit invalide
+            'credits_ects' => 35, 
             'semestre' => 1,
         ]);
     }

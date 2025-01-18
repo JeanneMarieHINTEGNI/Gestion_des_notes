@@ -18,7 +18,7 @@ class NotesTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('notes', [
-            'note' => 15,
+            'note' => 15, 
         ]);
     }
 
@@ -27,7 +27,7 @@ class NotesTest extends TestCase
         $this->expectException(\Illuminate\Validation\ValidationException::class);
 
         Note::create([
-            'note' => 25, // Note invalide
+            'note' => 25, 
             'session' => 'normale',
         ]);
     }

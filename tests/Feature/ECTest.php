@@ -30,7 +30,7 @@ class ECTest extends TestCase
         EC::create([
             'code' => 'EC02',
             'nom' => 'Mathématiques Avancées',
-            'coefficient' => 6, // Coefficient invalide
+            'coefficient' => 6, 
         ]);
     }
 }
