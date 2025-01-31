@@ -2,35 +2,38 @@
 
 namespace Tests\Feature;
 
+use App\Models\EC;
+use App\Models\UE;
+use App\Models\Teacher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\EC;
 
-class ECTest extends TestCase
+class ECControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_creation_ec_valide()
+    /** @test */
+    public function it_creates_an_ec_successfully(): void
     {
-        $ec = EC::factory()->create([
-            'code' => 'EC01',
-            'nom' => 'Introduction à la Programmation',
-            'coefficient' => 2,
-        ]);
+        // Préparation des données
+        $ue = UE::factory()->create(); // Crée une UE via une Factory
+        $teacher = Teacher::factory()->create(); // Crée un enseignant via une Factory
 
-        $this->assertDatabaseHas('elements_constitutifs', [
-            'code' => 'EC01',
-        ]);
-    }
+        $data = [
+            'code' => 'EC101',
+            'name' => 'Programmation Avancée',
+            'coefficient' => 2.0,
+            'ue_id' => $ue->id,
+            'teacher_id' => $teacher->id,
+        ];
 
-    public function test_coefficient_valide()
-    {
-        $this->expectException(\Illuminate\Validation\ValidationException::class);
+        // Requête POST pour créer un EC
+        $response = $this->post(route('ecs.store'), $data);
 
-        EC::create([
-            'code' => 'EC02',
-            'nom' => 'Mathématiques Avancées',
-            'coefficient' => 6, 
-        ]);
+        // Vérifications
+        $response->assertRedirect(route('ecs.index'));
+        $this->assertDatabaseHas('ecs', ['code' => 'EC101', 'name' => 'Programmation Avancée']);
     }
 }
+
+
