@@ -9,11 +9,23 @@ class EC extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'nom', 'coefficient', 'ue_id'];
+    protected $fillable = [
+        'code',
+        'name',
+        'coefficient',
+        'ue_id',
+        'teacher_id',
+    ];
 
     public function ue()
     {
-        return $this->belongsTo(UE::class, 'ue_id');
+        return $this->belongsTo(UE::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 }
+
 
